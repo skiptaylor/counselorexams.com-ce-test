@@ -236,12 +236,14 @@ post '/checkout/:product/?' do
       
     if settings.environment == 'production'
       unless user.purchases.count > 1 
-       if (params[:package] == 'NCMHCE: Starter Package SetA') || (params[:package] == 'NCMHCE: Starter Package SetB') || (params[:package] == 'NCMHCE: Starter Package SetC') || (params[:package] == 'NCMHCE: Starter Package SetD') || (params[:package] == 'NCMHCE: Full Package')
+       if (params[:package] == 'NCMHCE: Starter Package SetA') || (params[:package] == 'NCMHCE: Starter Package SetB') || (params[:package] == 'NCMHCE: Starter Package SetC') || (params[:package] == 'NCMHCE: Starter Package SetD')
          
          Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
          Email.secondchance(user.email, user.name)
        # else
        #   Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
+       else (params[:package] == 'NCMHCE: Full Package')
+          Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
        end
      end
     end
