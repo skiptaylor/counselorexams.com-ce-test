@@ -47,7 +47,7 @@
 		<!-- <hr style="margin-top: 0; margin-bottom: 0; border-top: 1px solid #3562a9;" /> -->
 		<table class="table table-stripe">
 			<tbody>
-				<!-- <% @user.caseaverages.each do |caseaverage| %>
+				<% @user.caseaverages.each do |caseaverage| %>
 				<% if caseaverage.casestudy_id != nil %>
 				<% if caseaverage.score > 0 %>
 				<tr class="cs">
@@ -66,7 +66,7 @@
 				<% end %>
 				<tr>
 					<td> </td><td> </td><td> </td>
-				</tr> -->
+				</tr>
 				<tr style="background-color: #dbe5e4;">
 					<td style="padding: 8px; color: #fff; background-color: #0a7fff;"><strong>Set-A</strong></th>
 					<td  colspan="2" style="padding:  3px 8px; color: #000;"><strong>Diagnosis</strong><% unless @user.setA %><span style="float: right;"><a href="/checkout/ncmhce_a?package=Package%20SetA" class="btn btn-success"><strong>Purchase Set A for $90</strong></a></span><% end %><% if Caseaverage.all(set: "A", user_id: session[:user]).count == 12 %><span class="pull-right"><strong>Set-A Complete</strong>&nbsp;&nbsp;&nbsp;<a class="btn btn-success" href="/casestudies/A/setscore">Get your final exam score</a></span><% end %></th>
