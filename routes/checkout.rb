@@ -195,10 +195,10 @@ post '/checkout/:product/?' do
                  msg = false
   end
   
-  case params[:hardcopy]
+  case params[:hard_copy]
   when 'NCMHCE Hard Copy'
     user.hard_copy = true
-    params[:hardcopy] = 'NCMHCE: Hard Copy'
+    params[:hard_copy] = 'NCMHCE: Hard Copy'
 	             msg = false
   end
   
@@ -208,7 +208,7 @@ post '/checkout/:product/?' do
 			user.expiration_date = (user.expiration_date + 90)
     elsif (params[:package] == 'Account Expiration')
       user.expiration_date = (DateTime.now + 90)
-  	elsif (params[:package] == 'NCMHCE: Hard Copy') || (params[:package] == 'NCMHCE: Second Chance Upgrade') || (params[:package] == 'NCMHCE Hard Copy')
+  	elsif (params[:package] == 'NCMHCE: Hard Copy') || (params[:package] == 'NCMHCE: Second Chance Upgrade') || (params[:hard_copy] == 'NCMHCE Hard Copy')
   		user.expiration_date = (user.expiration_date + 0)
 		else
 			user.expiration_date = (DateTime.now + 365)

@@ -301,7 +301,7 @@
 			<a class="pull-right btn btn-primary btn-small" href="/downloads/casestudy?file=Case-Study-Overview-1-2.pdf">Download PDF</a>
 			<h3><span class="oswald" style="font-size: 1.2em;">NCMHCE Overview PDF Download</span></h3>
 			<br />
-		<% unless @user.hard_copy || @user.purchases.any? { |purchase| (purchase.options == "+ Hard Copy") } %>	
+		<% unless @user.hard_copy == true %>	
 			<a class="pull-right btn btn-success btn-small" href="/checkout/ncmhce-hard-copy">Buy NCMHCE Overview Hard Copy for $29</a>
 			<h3><span class="oswald" style="font-size: 1.2em;">NCMHCE Overview Hard Copy</span></h3>
 		<% end%>	

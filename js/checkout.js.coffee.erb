@@ -8,7 +8,7 @@ $(window).load ->
 	
 	summarize = () ->
 		$('#program-package-confirmation').html 			$("input[name='package']:checked").val()
-		$('#hardcopy-enhancements-confirmation').html 		$("input[name='hardcopy']:checked").val() || ""
+		$('#hardcopy-enhancements-confirmation').html 		$("input[name='hard_copy']:checked").val() || ""
 		$('#name-confirmation').html 						"#{$('input#first_name').val()} #{$('input#last_name').val()}"
 		$('#email-confirmation').html 						$('input#email').val()
 		$('#password-confirmation').html 					$('input#password').val()
@@ -23,11 +23,11 @@ $(window).load ->
 				
 		total = 0
 		package_total  = parseFloat($("input[name='package']:checked").attr('data-price'))  || 0
-		hardcopy_total = parseFloat($("input[name='hardcopy']:checked").attr('data-price')) || 0
+		hardcopy_total = parseFloat($("input[name='hard_copy']:checked").attr('data-price')) || 0
 		total = total + package_total + hardcopy_total
 		
 		$('#package-amount').html package_total.toFixed(2)
-		$('#hardcopy-amount').html hardcopy_total.toFixed(2)
+		$('#hard_copy-amount').html hardcopy_total.toFixed(2)
 		
 		if $('input#zip').val()
 			zip = $('input#zip').val()
