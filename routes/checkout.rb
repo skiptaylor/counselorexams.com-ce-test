@@ -203,7 +203,6 @@ post '/checkout/:product/?' do
   end
   
   
-    
   if params[:user_id]
 		if (params[:package] == 'Account Extension')
 			user.expiration_date = (user.expiration_date + 90)
@@ -241,8 +240,8 @@ post '/checkout/:product/?' do
          
          Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
          Email.secondchance(user.email, user.name)
-       else
-         Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
+       # else
+       #   Email.welcome(user.email, user.name, user.email, email, "#{params[:package]}", params[:amount])
        end
      end
     end
