@@ -1,0 +1,57 @@
+
+<fieldset>
+	<legend><span class="oswald" style="padding: 0 9px 0 7px;">1</span> Package <small style="color: white;"> &nbsp; (Choose one)</small></legend>
+	
+	<div class="row">	
+		<div class="span6 content">
+			<label class="radio package-name">
+				<input style="font-size: 1.2em;" name="package" type="radio" id="starter-package-d" value="Starter Package SetD" data-price='90' onclick="show1();" <%= 'checked="checked"' if params[:package] == 'Starter Package SetD' %> /> &nbsp;<span style="font-size: 1.8em;" class="oswald">Starter Package Set-D $90</span>
+			</label>
+			<p>
+				<ul class="package-features">
+					<li><strong>Set-D - 12 Case Studies*</strong></li>
+					<li>NCMHCE Overview PDF Download</li>
+					<li>Money Back Pass Guarantee</li>
+					<li>3-day Satisfaction Guarantee</li>
+					<li>Online account active for one year</li>
+					<li>Phone consultation directly with Dr. Gary Arthur for up to 30 minutes</li>
+					<li>Second Chance Upgrade**</li>
+				</ul>
+			</p>
+			<p style="font-size: 0.85em; line-height: 1.3em;">* Additional online case studies can be purchased later in sets of 12 for $90.</p>
+			<p style="font-size: 0.85em; line-height: 1.3em;">** Within two weeks of purchase you may exchange Starter Package purchase for Full Package for the difference in cost.</p>
+		</div>	<!-- span6 -->				
+		<div class="span6 content">
+			<label class="radio package-name">
+				<input style="font-size: 1.2em;" name="package" type="radio" id="full-package" value="Full Package" data-price='260' onclick="show2();" <%= 'checked="checked"' if params[:package] == 'Full Package' %> /> &nbsp;<span style="font-size: 1.8em;" class="oswald">Full Package $260</span>
+				 &nbsp; &nbsp; <span style="font-size: 1.6em; color: #bc272e;" class="oswald">You Save $100!</span>
+			</label>
+			<p>
+			<ul class="package-features">
+				<li><strong>All 4 Sets of 12 Case Studies (48 total)</strong></li>
+				<li>NCMHCE Overview PDF Download</li>
+				<li>Money Back Pass Guarantee</li>
+				<li>3-day Satisfaction Guarantee</li>
+				<li>Online account active for one year</li>
+				<li>Phone consultation directly with Dr. Gary Arthur for up to 30 minutes</li>
+			</ul>
+			</p>
+		</div>	<!-- span6 -->
+	</div>
+	<div class="row">
+		<div class="span6">		
+			<p style="margin: 1em 0 0 0;">
+				<label class="checkbox">
+					<input style="font-size: 1.2em;" type="checkbox" name="hardcopy" value="Hard Copy" id="ncmhce-hard-copy" data-price='29' <%= 'checked="checked"' if params[:optional] %> />&nbsp;<span style="font-size: 1.8em;" class="oswald">NCMHCE Overview Hard Copy $29</span>
+				</label>	
+				<ul class="package-features">
+					<li>Same document as the PDF download.</li>
+					<li>Includes shipping and handling.</li>
+				</ul>
+				<small style="color: black;"><strong>Note:</strong> If you require shipment to a PO Box please call toll free 888-326-9229 for details.</small>
+			</p> 
+		</div>
+	</div>
+</fieldset>	
+
+	

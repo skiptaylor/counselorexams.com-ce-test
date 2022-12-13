@@ -1,0 +1,49 @@
+<div class="row">
+
+	<div class="span3">
+		<%= erb :'admin/navigation', layout: false %>
+	</div>
+
+	<div class="span9">
+		
+		<div class="page-header">
+			<h2>Products</h2>
+		</div>
+			<table class="table table-striped">
+				<tr>
+					<th>
+						Product
+					</th>
+					<th>
+						Package
+					</th>
+					<th>
+						Amount
+					</th>
+					<th style="text-align: right;">
+						<a class="btn btn-mini btn-success" href="/admin/products/new"><i class="icon-plus icon-white"></i></a>
+					</th>
+				</tr>
+				<% @products.each do |product| %>
+				<tr>
+					<td>
+						<%= product.name %>
+					</td>
+					<td>
+						<%= product.package %>
+					</td>
+					<td>
+						<%= product.amount %>
+					</td>
+					<td style="text-align: right;">
+						<a class="btn btn-mini btn-primary" href="/admin/products/<%= product.id %>/edit"><i class="icon-edit icon-white"></i></a>
+					</td>
+				</tr>
+				<% end %>
+
+			</table>
+		</div>
+		
+	</div>
+
+</div>

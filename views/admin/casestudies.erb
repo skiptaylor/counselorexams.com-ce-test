@@ -1,0 +1,39 @@
+<div class="row">
+
+	<div class="span12">
+		<H1 class="page-header">Case Studies</H1>
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th style="text-align: center;">Set</th>
+					<th>Title</th>
+					<th>Diagnosis</th>
+					<td style="text-align: center;"> </th>
+					<td style="text-align: right;"><a class="btn btn-small btn-success" href="/admin/casestudies/new">New</a></td>
+					
+					
+				</tr>
+			</thead>
+			<tbody>
+				<% @casestudies.sort_by{|casestudy| [casestudy.set, casestudy.title.to_i]}.each do |casestudy| %>
+				<tr>
+					<td style="text-align: center;"><% if casestudy.set == "A" %><strong style="color: #af210e;"><%= casestudy.set %></strong><% elsif casestudy.set == "B" %><strong style="color: #0b647f;"><%= casestudy.set %></strong><% elsif casestudy.set == "C" %><strong style="color: #487515;"><%= casestudy.set %></strong><% elsif casestudy.set == "D" %><strong style="color: #ba9838;"><%= casestudy.set %></strong><% else %><strong><%= casestudy.set %></strong><% end %></td>
+					<td>Case Study <%= casestudy.title %></td>
+					<td><%= casestudy.diagnosis %></td>
+					<td style="text-align: center;">
+					<% if casestudy.active? %>
+						<span class="label label-success">Active</span>
+					<% else %>
+					<span class="label label">Inactive</span>
+					<% end %>
+					<% if casestudy.sample? %><span class="label label-warning">Sample</span><% end %>
+					</td>
+					<td style="text-align: right;"><a class="btn btn-mini btn-primary" href="/admin/casestudies/<%= casestudy.id %>/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-mini btn-info" href="/admin/casestudies/<%= casestudy.id %>/view">View</a></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<div style="color: #c6772e; text-align: center;"></div>
+	</div>
+
+</div>

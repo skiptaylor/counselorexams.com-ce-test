@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="span12">
+		<h1>Questions</h1>		
+		<hr />
+		<form class="form-horizontal" method="post">
+			<fieldset>
+				
+				
+				<div class="control-group">
+					<label class="control-label" for="part">Part</label>
+					<div class="controls">
+						<input type="text" name="part" id="part" class="span7" value="<%= @casequestions.part %>" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="position">Question Number</label>
+					<div class="controls">
+						<input type="text" name="position" id="position" class="span2" value="<%= @casequestions.position %>" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="body">Question</label>
+					<div class="controls">
+						<input type="text" name="body" id="body" class="span7" value="<%= @casequestions.body %>" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="domain">Domain:</label>
+					<div class="controls">
+						<select name="domain" class="span6">
+							<option value="Undefined">Undefined</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 1. Professional Practice and Ethics' %> value="Domain 1. Professional Practice and Ethics">Domain 1. Professional Practice and Ethics</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 2. Intake, Assessment, and Diagnosis' %> value="Domain 2. Intake, Assessment, and Diagnosis">Domain 2. Intake, Assessment, and Diagnosis</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 3. Areas of Clinical Focus' %> value="Domain 3. Areas of Clinical Focus">Domain 3. Areas of Clinical Focus</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 4. Treatment Planning' %> value="Domain 4. Treatment Planning">Domain 4. Treatment Planning</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 5. Counseling Skills and Interventions' %> value="Domain 5. Counseling Skills and Interventions">Domain 5. Counseling Skills and Interventions</option>
+							<option <%= 'selected' if @casequestions.domain == 'Domain 6. Core Counseling Attributes' %> value="Domain 6. Core Counseling Attributes">Domain 6. Core Counseling Attributes</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="sub_domain">Sub-Domain:</label>
+					<div class="controls">
+						<select name="sub_domain" class="span8">
+							<option value="Undefined">Undefined</option>
+							<%= erb :'/admin/sub-domains/sub-domain-1', layout: false %>
+							<%= erb :'/admin/sub-domains/sub-domain-2', layout: false %>
+							<%= erb :'/admin/sub-domains/sub-domain-3', layout: false %>
+							<%= erb :'/admin/sub-domains/sub-domain-4', layout: false %>
+							<%= erb :'/admin/sub-domains/sub-domain-5', layout: false %>
+							<%= erb :'/admin/sub-domains/sub-domain-6', layout: false %>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="discussion">Discussion</label>
+					<div class="controls">
+						<textarea type="text" name="discussion" id="discussion" class="span7 md" rows="6" ><%= @casequestions.discussion %></textarea>
+					</div>
+				</div>
+				<!-- <div class="control-group">
+					<label class="control-label" for="position">Position</label>
+					<div class="controls">
+						<input type="text" name="position" id="position" class="span7" value="<%= @casequestions.position %>" />
+					</div>
+				</div> -->
+				
+						
+				<hr />
+
+				<div class="control pull-right">
+					<input class="btn btn-small btn-success" type="submit" value="Save" />&nbsp;&nbsp;&nbsp;<a class="btn btn-small" onclick="goBack()">Cancel</a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<script>
+	function goBack() {
+	window.history.back();
+}
+</script>
+
+
+ 
+
+
+    

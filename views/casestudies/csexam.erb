@@ -1,0 +1,304 @@
+<style>
+	p.cond { margin-bottom: 4px; }
+	.nav.nav-tabs li a	{ border-color: black; }
+	.nav.nav-tabs li.active	{ color: red; }
+	.nav.nav-tabs li	{
+		border: none;
+		border-color: white;
+		color: black;
+	}
+	h1	{
+		color: #445c6e;
+		font-size: 1.9em;
+		padding-bottom: 8px;
+	}
+	h4	{ padding-bottom: 5px; }
+	div.questions ul	{ padding-bottom: 2px; }
+	div.questions ul li ol	{ margin-top: 8px; }
+	div.questions ul li ol li	{ margin-left: 2em; }
+	.md blockquote	{ font-size: 11px; }
+	.600	{ font-weight: 600; }
+	
+	.current	{
+		display: none;
+		transition: all 1s ease-in-out;
+	}
+	.pHead	{
+		color: #1b497f;
+	}
+	div.questground	{
+		background-color: #eff1f2; 
+		padding: 1em;
+	    -webkit-border-radius: 12px;
+	    -moz-border-radius: 12px;
+	    border-radius: 12px;
+		border-left: 2px solid #ccd8cc;
+	}
+
+</style>
+
+<script>
+	var current_question = 1;
+</script>
+
+<script>
+	$(window).load(function() {	
+		var element = document.getElementById(current_question);
+		element.classList.remove("current");
+		var element = document.getElementById("start");
+		element.classList.add("current");
+	}).call(this);
+</script>
+
+<script>
+	function nextQuestion() {
+		var element = document.getElementById(current_question);
+		element.classList.add("current");
+		current_question += 1;
+		var element = document.getElementById(current_question);
+		element.classList.remove("current");
+	}
+</script>
+	
+<script>
+	function getScore() {
+		var element = document.getElementById(current_question);
+		element.classList.add("current");
+		current_question += 1;
+		var element = document.getElementById(current_question);
+		element.classList.remove("current");
+	}
+</script>
+
+<form id="form" method="POST" action="/casestudies/<%= @casestudies.id %>">
+					
+<div class="row" style="margin-top: -24px;">
+	<div class="span12">
+		<div class="page-header">
+			<div class="pull-right" style="margin-top: 7px;">
+				<p style="color: #b32623; font-weight: 600; font-size: 0.9em;">You should read these exam instructions before beginning.&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#infoModal" role="button" style="margin-top: -3px;" class="btn btn-info pull-right" data-toggle="modal"><strong>Exam Instructions</strong> &nbsp; <i class="icon-chevron-down icon-white"></i></a></p>
+			</div>
+			<h1>
+				<% if @casestudies.set == "Z" %>
+					Sample Case Study
+				<% else %>
+					Set <%= @casestudies.set %> - Case Study <%= @casestudies.title %>
+				<% end %>
+			</h1>
+			
+		</div>
+	</div>
+</div>
+
+<div class="row">	
+	<div class="modal hide fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="color: white; background-color: #4287d9;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h2 class="modal-title" id="infoModalLabel">Exam Instructions</h2>
+				</div>
+				<div class="modal-body" style="margin: 2em;">
+					<p>If you leave the exam case study page before finishing, your selected answers will be lost and you will need to start over.</p>
+					<p>There are three parts to each case study beginning with Intake. The chart is on the left and the questions are on the right. You can't go back once a part has been completed.</p>
+					<p>Questions are presented one at a time with the "Next Question" button leading through all 13. Answering Question 13, the last, will submit your answers and create your score page.</p>
+					<p>Each question has 4 multiple choice answers. Once an answer is submitted you can't go back.</p>
+					<p>The score page shows your score and all parts, questions, and answers. The correct answer to a question will be shown along with your selected answer - right or wrong. Feedback for the correct answer is shown below each question.</p>
+					<p>You will have access to this case study from your profile page at any time to see your score, review it, or retake it.</p>
+					<p>Once all 12 case studies have been completed you will have access to an Overall Exam Score page that provides an overall score for the set of 12 case studies. The score will be broken down for all 5 domains, allowing you to focus your further studies on areas where you scored weakest.</p>
+					<p>This is a simulation and all answers count. All questions are scored on our case study simulations. On the NCMHCE, each case study will have 9 – 15 questions, but not all will be counted in your final score. Because unscored questions are not indicated, it is best to assume all will count when answering. We have set-up our case studies and scoring accordingly.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<div class="row">
+	
+	<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+	<% if casequestion.part == 1 %>
+	
+	<div class="current questions"  id="<%= casequestion.position %>">
+		<div class="span6 pull-right" style="margin-top: 3em;">
+			<div class="questground">	
+			<h4>Question <%= casequestion.position %></h4>
+			<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+			<p><em><%= casequestion.sub_domain %></em></p>
+		
+			<ul style="list-style: none;">
+				<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+							<%= '<i class="icon-ok"></i>' if caseanswer && @average %>
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" />
+						 <% if caseanswer.correct == "true" %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>
+					</ol>
+				</li>
+			</ul>  
+			<a class="btn btn-primary pull-right" onclick="nextQuestion()" >Next Question</a><br /><br />
+		</div><br />
+			<% if session[:sample] %>
+			<span class="pull-right"><small>End sample case study before finishing</small>&nbsp;&nbsp;<a class="btn btn-small" href="/casestudies/<%= params[:id] %>/finished">Quit</a></span>
+			<% end %>
+		</div>
+		
+		<div class="span6" id="part_1" style="margin-top: -1em;">
+			<h1 class="pHead">Part One</h1>
+			<h3>Intake</h3>
+			<hr style="margin: 9px 0;" />
+			<p class="cond" style="font-size: 1.1em; margin-bottom: 4px;"><strong><%= @casestudies.name %></strong></p>
+			<p class="cond"><strong>Age:</strong>&nbsp;&nbsp;<%= @casestudies.age %></p>
+			<p class="cond"><strong>Sex:</strong>&nbsp;&nbsp;<%= @casestudies.sex %></p>
+			<p class="cond"><strong>Gender:</strong>&nbsp;&nbsp;<%= @casestudies.gender %></p>
+			<p class="cond"><strong>Sexuality:</strong>&nbsp;&nbsp;<%= @casestudies.sexuality %></p>
+			<p class="cond"><strong>Ethnicity:</strong>&nbsp;&nbsp;<%= @casestudies.ethnicity %></p>
+			<p class="cond"><strong>Relationship Status:</strong>&nbsp;&nbsp;<%= @casestudies.relationship %></p>
+			<p class="cond"><strong>Counseling Setting:</strong>&nbsp;&nbsp;<%= @casestudies.setting %></p>
+			<p class="cond"><strong>Types of Counseling:</strong>&nbsp;&nbsp;<%= @casestudies.types %></p>
+			<p class="cond"><strong>Presenting Problem:</strong>&nbsp;&nbsp;<%= @casestudies.problem %></p>
+			<p class="cond"><strong>Diagnosis:</strong>&nbsp;&nbsp;<%= @casestudies.diagnosis %></p>
+			<p class="cond">&nbsp;&nbsp;</p>
+			<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+				<% if chart.part == "1" %>
+				<h4><%= chart.title %></h4>
+				<p><%= chart.body %></p>
+				<% end %>
+			<% end %>
+		</div>
+	
+	</div>
+	
+	<% end %>
+	<% end %>
+</div>
+
+<div class="row">
+	
+	<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+	<% if casequestion.part == 2 %>
+	
+	<div class="current questions" id="<%= casequestion.position %>">
+		
+		<div class="span6 pull-right" style="margin-top: 3em;">
+			<div class="questground">
+				<h4>Question <%= casequestion.position %></h4>
+			<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+			<p><em><%= casequestion.sub_domain %></em></p>
+		
+			<ul style="list-style: none;">
+				<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+							<%= '<i class="icon-ok"></i>' if caseanswer && @average %>
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" />
+						 <% if caseanswer.correct == "true" %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>
+					</ol>
+				</li>
+			</ul>
+			<a class="btn btn-primary pull-right" onclick="nextQuestion()">Next Question</a><br /><br />
+
+			</div>
+			<br />
+			<% if session[:sample] %>
+			<span class="pull-right"><small>End sample case study before finishing</small>&nbsp;&nbsp;<a class="btn btn-small" href="/casestudies/<%= params[:id] %>/finished">Quit</a></span>
+			<% end %>
+		</div>
+
+		<div class="span6" id="part_2" style="margin-top: -1em;">
+			<h1>Part Two</h1>
+			<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+				<% if chart.part == "2" %>
+				<h4><%= chart.title %></h4>
+				<p><%= chart.body %></p>
+				<% end %>
+			<% end %>
+		</div>
+		
+	</div>
+	
+	<% end %>
+	<% end %>
+	
+</div>
+
+<div class="row">
+	
+	<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+	<% if casequestion.part == 3 %>
+	
+	<div class="current questions" style="margin-top: 2em;" id="<%= casequestion.position %>">
+		
+		<div class="span6 pull-right" style="margin-top: 3em;">
+			<div class="questground">
+				<h4>Question <%= casequestion.position %></h4>
+			<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+			<p><em><%= casequestion.sub_domain %></em></p>
+			
+			<ul style="list-style: none;">
+				<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+							<%= '<i class="icon-ok"></i>' if caseanswer && @average %>
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" />
+						 <% if caseanswer.correct == "true" %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>
+					</ol>
+				</li>
+			
+				<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion if @average && casequestion.discussion %></blockquote></li>
+			</ul>
+			<% if casequestion.position == 13 %>
+			<button class="btn btn-primary pull-right" onclick="getScore()" type="submit">Submit & Get Score</button>
+			<% else %>
+			<a class="btn btn-primary pull-right" onclick="nextQuestion()">Next Question</a><br /><br />
+			<% end %>
+			<br /><br />
+			</div>
+			<br />
+			<% if session[:sample] %>
+			<span class="pull-right"><small>End sample case study before finishing</small>&nbsp;&nbsp;<a class="btn btn-small" href="/casestudies/<%= params[:id] %>/finished">Quit</a></span>
+			<% end %>
+		</div>
+		
+		<div class="span6" id="part_3" style="margin-top: -3em;">
+			<h1>Part Three</h1>
+			<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+				<% if chart.part == "3" %>
+				<h4><%= chart.title %></h4>
+				<p><%= chart.body %></p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	
+	<% end %>
+	<% end %>
+	
+</div>
+
+</form>
+

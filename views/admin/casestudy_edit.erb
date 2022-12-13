@@ -1,0 +1,193 @@
+<style>
+	input[type=text], textarea[type=text] { border: 1px solid #396292; padding: 7px; }
+	
+</style>
+
+	<div class="row">
+		<div class="span12">
+			<div style="float: right"><a class="btn btn-info btn-small" href="/admin/casestudies/<%= @casestudies.id %>/view">View Case Study</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-small btn-primary" href="/admin/casestudies">Index</a></div>
+			<h1>Case Study</h1>		
+			<hr style="border-color: #4e86c6" />
+
+				<form class="form-horizontal" method="post">
+					<fieldset>
+						<div class="row">
+							<div class="span8">
+								<div class="control-group">
+									<label class="control-label" for="set">Set</label>
+									<div class="controls">
+										<input type="text" name="set" id="set" class="span2" value="<%= @casestudies.set %>" />
+									</div>
+								</div>
+								<!-- <div class="control-group">
+									<label class="control-label" for="number">Number</label>
+									<div class="controls">
+										<input type="text" name="number" id="number" class="span2" value="<%= @casestudies.number %>" />
+									</div>
+								</div> -->
+								<div class="control-group">
+									<label class="control-label" for="title">Case Study</label>
+									<div class="controls">
+										<input type="text" name="title" id="title" class="span2" value="<%= @casestudies.title %>" />
+									</div>
+								</div>
+							</div>
+							<div class="span4">
+								<div class="control-group" style="float: right;">
+									<label class="checkbox">
+										<input type="checkbox" name="active" <%= 'checked' if @casestudies.active? %> /> Active
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" name="sample" <%= 'checked' if @casestudies.sample? %> /> Sample
+									</label>
+								</div>
+							</div>
+						</div>	
+						
+						<hr style="border-color: #4e86c6" />
+						<h4>Intake</h4>
+						<div class="control-group">
+							<label class="control-label" for="name">Name</label>
+							<div class="controls">
+								<input type="text" name="name" id="name" class="span7" value="<%= @casestudies.name %>" /> 
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="age">Age</label>
+							<div class="controls">
+								<input type="text" name="age" id="age" class="span2" value="<%= @casestudies.age %>" /> 
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="sex">Sex</label>
+							<div class="controls">
+								<input type="text" name="sex" id="sex" class="span7" value="<%= @casestudies.sex %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="gender">Gender</label>
+							<div class="controls">
+								<input type="text" name="gender" id="gender" class="span7" value="<%= @casestudies.gender %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="sexuality">Sexuality</label>
+							<div class="controls">
+								<input type="text" name="sexuality" id="sexuality" class="span7" value="<%= @casestudies.sexuality %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="ethnicity">Ethnicity</label>
+							<div class="controls">
+								<input type="text" name="ethnicity" id="ethnicity" class="span7" value="<%= @casestudies.ethnicity %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="relationshipv">Relationship Status</label>
+							<div class="controls">
+								<input type="text" name="relationship" id="relationship" class="span7" value="<%= @casestudies.relationship %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="setting">Counseling Setting</label>
+							<div class="controls">
+								<input type="text" name="setting" id="setting" class="span9" value="<%= @casestudies.setting %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="types">Types of Counseling</label>
+							<div class="controls">
+								<input type="text" name="types" id="types" class="span9" value="<%= @casestudies.types %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="problem">Presenting Problem</label>
+							<div class="controls">
+								<input type="text" name="problem" id="problem" class="span9" value="<%= @casestudies.problem %>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="diagnosis">Diagnosis</label>
+							<div class="controls">
+								<input type="text" name="diagnosis" id="diagnosis" class="span9" value="<%= @casestudies.diagnosis %>" />
+							</div>
+						</div>
+						<hr />
+							<div class="control pull-right">
+								<input class="btn btn-small btn-success" type="submit" value="Save" /> &nbsp; <a class="btn btn-small" onclick="goBack()">Cancel</a> &nbsp; <a class="btn btn-small btn-danger delete" href="/admin/casestudies/<%= @casestudies.id %>/delete">Delete</a>
+							</div>
+							<div>
+								<a class="btn btn-info" href="/admin/casestudies/<%= @casestudies.id %>/view">View Case Study</a>
+							</div>
+						<hr style="border-color: #4e86c6" />
+						<div style="float: right;"><a class="btn btn-small btn-primary" href="/admin/casestudies/<%= @casestudies.id %>/charts/new">New Chart</a></div>
+						<h4>Charts</h4>
+						<br />
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th style="text-align: center;">Part</th>
+									<th style="text-align: center;">Position</th>
+									<th>Title</th>
+									<th> </th>
+								</tr>
+							</thead>
+							<tbody>
+						<% @casestudies.charts.sort_by{ |p| [p.part, p.position] }.each do |chart| %>
+						<tr>
+							<td style="text-align: center;"><strong><%= chart.part %></strong></td>
+							<td style="text-align: center;"><%= chart.position %></td>
+							<td><%= chart.title %></td>
+							<td style="text-align: right;"><a class="btn btn-mini btn-inverse" href="/admin/casestudies/<%= @casestudies.id %>/charts/<%= chart.id %>/edit">Edit</a></td>
+						</tr>
+						<% end %>
+							</tbody>
+						</table>
+						
+						
+						<hr style="border-color: #4e86c6" />
+						<div style="float: right;"><a class="btn btn-small btn-primary" href="/admin/casestudies/<%= @casestudies.id %>/casequestions/new/">New Question</a></div>
+						<h4>Questions</h4>
+						<br />
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th style="text-align: center;">Part</th>
+									<th>Question</th>
+									<th style="text-align: right;">Qs/As</th>
+								</tr>
+							</thead>
+							<tbody>
+						<% @casestudies.casequestions.sort_by(&:position).each do |casequestion| %>
+						<tr>
+							<td style="text-align: center;"><strong><%= casequestion.part %></strong></td>
+							<td><%= casequestion.position %>. <%= casequestion.body %></td>
+							<td style="text-align: right;"><a class="btn btn-mini btn-inverse" href="/admin/casestudies/<%= @casestudies.id %>/casequestions/<%= casequestion.id %>/edit">Edit</a></td>
+						</tr>
+						<% end %>
+							</tbody>
+						</table>
+						
+						
+						<hr style="border-color: #4e86c6" />
+						
+						<h4>Resources</h4><br />
+						<div class="control-group">
+							
+							
+								<textarea type="text" name="resources" id="resources" class="span12" rows="16"><%= markdown @casestudies.resources %></textarea>
+							
+						</div>
+						<div class="control pull-right">
+							<input class="btn btn-small btn-success" type="submit" value="Save" />
+						</div>	
+					</fieldset>
+				</form>
+		</div>
+	</div>
+	
+	<script>
+		function goBack() {
+		window.history.back();
+	}
+	</script>

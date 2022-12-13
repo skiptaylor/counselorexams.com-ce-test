@@ -1,0 +1,234 @@
+<style>
+	p.cond { margin-bottom: 4px; }
+	.nav.nav-tabs li a	{ border-color: black; }
+	.nav.nav-tabs li.active	{ color: red; }
+	.nav.nav-tabs li	{
+		border: none;
+		border-color: white;
+		color: black;
+	}
+	h1	{
+		color: #445c6e;
+		font-size: 1.9em;
+		padding-bottom: 8px;
+	}
+	h4	{ padding-bottom: 5px; }
+	div.questions ul	{ padding-bottom: 2px; }
+	div.questions ul li ol	{ margin-top: 8px; }
+	div.questions ul li ol li	{ margin-left: 2em; }
+	input[type="radio"]:disabled {  color : darkGray; }
+	.md blockquote	{ font-size: 11px; }
+	.600	{ font-weight: 600; }
+</style>
+
+<div class="row" style="margin-top: -24px;">
+	<div class="span12">
+		<div class="page-header">
+			<h1>
+
+		<% if @casestudies.set == "Z" %>
+			Sample Case Study
+		<% else %>
+			<span class="pull-right">Name: <%= @user.name %></span>
+			Set <%= @casestudies.set %> - Case Study <%= @casestudies.title %>
+		<% end %>
+	</h1>
+		</div>
+		
+		<div class="well" style="margin-top: -12px; border-color: #4e86c6">
+			
+			<h1 style="color: green;" class="pull-right">Your Score: <%= @percent unless @percent == 0 %>%</h1>
+			
+			<h3>You selected <%= @counter %> correct answers from 13 questions</h3>
+			
+			<br />
+			
+			<p>Correct answers are <i class="icon-ok"></i> checked.<br />
+				Your correct answers are <span style="color: green;"><strong>Green</strong></span>.<br />
+				Your incorrect answers are <span style="color: red;"><strong>red</strong></span>.
+			</p>
+			<p class="pull-right"style="margin-top: -2em;"><% unless @casestudies.set == "Z" %><a href="/casestudies/<%= params[:id] %>/caserestart" class="btn btn-primary caserestart">Start Over</a>&nbsp;&nbsp;<a href="/casestudies/cs_index" class="btn btn-success restart">New Case Study</a><% else %><a href="/casestudies/<%= params[:id] %>/finished" class="btn btn-primary">Finished</a><% end %></p>
+				
+		</div>
+		<p style="margin: -12px 0 12px 0;"><em>All questions are scored on our case study simulations. On the NCMHCE, each
+		case study will have 9 – 15 questions, but not all will be counted in your final score.
+		Because unscored questions are not indicated, it is best to assume all will count
+		when answering. We have set-up our case studies and scoring accordingly.</em></p>
+	</div>
+</div>
+
+<div class="row part" id="part_1">
+	<div class="span6" style="margin-top: 0px;">
+		<div>
+			<h1>Part One</h1>
+			<h3>Intake <%= params[:part] %></h3>
+			<hr style="margin: 9px 0;" />
+		</div>	
+		<div>	
+			<p class="cond" style="font-size: 1.1em; margin-bottom: 4px;"><strong><%= @casestudies.name %></strong></p>
+			<p class="cond"><strong>Age:</strong>&nbsp;&nbsp;<%= @casestudies.age %></p>
+			<p class="cond"><strong>Sex:</strong>&nbsp;&nbsp;<%= @casestudies.sex %></p>
+			<p class="cond"><strong>Gender:</strong>&nbsp;&nbsp;<%= @casestudies.gender %></p>
+			<p class="cond"><strong>Sexuality:</strong>&nbsp;&nbsp;<%= @casestudies.sexuality %></p>
+			<p class="cond"><strong>Ethnicity:</strong>&nbsp;&nbsp;<%= @casestudies.ethnicity %></p>
+			<p class="cond"><strong>Relationship Status:</strong>&nbsp;&nbsp;<%= @casestudies.relationship %></p>
+			<p class="cond"><strong>Counseling Setting:</strong>&nbsp;&nbsp;<%= @casestudies.setting %></p>
+			<p class="cond"><strong>Types of Counseling:</strong>&nbsp;&nbsp;<%= @casestudies.types %></p>
+			<p class="cond"><strong>Presenting Problem:</strong>&nbsp;&nbsp;<%= @casestudies.problem %></p>
+			<p class="cond"><strong>Diagnosis:</strong>&nbsp;&nbsp;<%= @casestudies.diagnosis %></p>
+			<p class="cond">&nbsp;&nbsp;</p>
+			<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+				<% if chart.part == "1" %>
+				<h4><%= chart.title %></h4>
+				<p><%= chart.body %></p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="span6 questions" style="margin-top: 12px;">
+	<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+	<% if casequestion.part == 1 %>
+	<h4>Question <%= casequestion.position %></h4>
+	<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+	<p><em><%= casequestion.sub_domain %></em></p>
+	<ul style="list-style: none;">
+		<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+			<ol type="A">
+				<% casequestion.caseanswers.each do |caseanswer| %>
+				<label class="radio">
+				<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" disabled="disabled" <%= 'checked' if caseanswer.correct == "true" %>>
+				<% if @casescores.include?(caseanswer.id) && caseanswer.correct == "true" %>
+					<li style = "color: green; font-weight: bold;"><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+				<% elsif caseanswer.correct == "true" %>
+					<li><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+				<% elsif @casescores.include?(caseanswer.id) %>
+					<li style = "color: red; font-weight: bold;"><% caseanswer.position %> <%= caseanswer.body %></li>
+				<% else %>
+					<li style = "color: inheret;"><% caseanswer.position %> <%= caseanswer.body %></li>
+				<% end %>
+				</label>
+				<% end %>	
+			</ol>
+		</li>
+		<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion if casequestion.discussion %></blockquote></li>
+	</ul>
+	<% end %>
+	<% end %>
+</div>
+</div>	
+
+<hr style="border-color: #4e86c6" />
+
+<div class="row part" id="part_2">
+	<div class="span6" style="margin-top: -2px;">
+		<h1>Part Two</h1>
+		<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+			<% if chart.part == "2" %>
+			<h4><%= chart.title %></h4>
+			<p><%= chart.body %></p>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="span6 questions">
+		<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+		<% if casequestion.part == 2 %>
+		<h4>Question <%= casequestion.position %></h4>
+		<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+		<p><em><%= casequestion.sub_domain %></em></p>
+		<ul style="list-style: none;">
+			<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+				<ol type="A">
+					<% casequestion.caseanswers.each do |caseanswer| %>
+					<label class="radio">
+					<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" disabled="disabled" <%= 'checked' if caseanswer.correct == "true" %>>
+					<% if @casescores.include?(caseanswer.id) && caseanswer.correct == "true" %>
+						<li style = "color: green; font-weight: bold;"><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+					<% elsif caseanswer.correct == "true" %>
+						<li><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+					<% elsif @casescores.include?(caseanswer.id) %>
+						<li style = "color: red; font-weight: bold;"><% caseanswer.position %> <%= caseanswer.body %></li>
+					<% else %>
+						<li style = "color: inheret;"><% caseanswer.position %> <%= caseanswer.body %></li>
+					<% end %>
+					</label>
+					<% end %>
+				</ol>
+			</li>
+			<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion if casequestion.discussion %></blockquote></li>
+		</ul>
+		<% end %>
+		<% end %>
+	</div>
+</div>
+
+<hr style="border-color: #4e86c6" />
+
+<div class="row part" id="part_3">
+	<div class="span6" style="margin-top: -2px;">
+		<div>
+		<h1>Part Three</h1>
+		<% @casestudies.charts.sort_by{|c| [c.part, c.position.to_i]}.each do |chart| %>
+			<% if chart.part == "3" %>
+			<h4><%= chart.title %></h4>
+			<p><%= chart.body %></p>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+	<div class="span6 questions">
+		<% @casestudies.casequestions.sort_by{|c| [c.part, c.position.to_i]}.each do |casequestion| %>
+		<% if casequestion.part == 3 %>
+		<h4>Question <%= casequestion.position %></h4>
+		<p style="margin-bottom: 4px; margin-top: 4px"><em><%= casequestion.domain %></em></P>
+		<p><em><%= casequestion.sub_domain %></em></p>
+		<ul style="list-style: none;">
+			<li><strong><%= casequestion.position %>.</strong> <%= casequestion.body %>
+				<ol type="A">
+					<% casequestion.caseanswers.each do |caseanswer| %>
+					<label class="radio">
+					<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>" disabled="disabled" <%= 'checked' if caseanswer.correct == "true" %>>
+					<% if @casescores.include?(caseanswer.id) && caseanswer.correct == "true" %>
+						<li style = "color: green; font-weight: bold;"><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+					<% elsif caseanswer.correct == "true" %>
+						<li><i class="icon-ok"></i> <% caseanswer.position %> <%= caseanswer.body %></li>
+					<% elsif @casescores.include?(caseanswer.id) %>
+						<li style = "color: red; font-weight: bold;"><% caseanswer.position %> <%= caseanswer.body %></li>
+					<% else %>
+						<li style = "color: inheret;"><% caseanswer.position %> <%= caseanswer.body %></li>
+					<% end %>
+					</label>
+					<% end %>
+				</ol>
+			</li>
+			<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion if casequestion.discussion %></blockquote></li>
+		</ul>
+		<% end %>
+		<% end %>
+		</div>
+	</div>
+	<div class="span12">
+		<hr style="border-color: #4e86c6" />
+		<div id="references">
+			<% unless @casestudies.resources == nil %>
+				<h2>Resources</h2>
+				<span class="reference" style="font-size: 14px;">
+				<%= markdown @casestudies.resources %>
+				</span>
+				<br />
+			<% end %>
+		</div>
+	</div>
+	
+</div>
+
+<!-- <script>
+
+  $(window).load(function() {
+    $('a.caserestart').click(function() {
+      if (!confirm('This will reset your scores! Continue?')) {
+        return false;
+      }
+    });
+  });
+
+</script> -->

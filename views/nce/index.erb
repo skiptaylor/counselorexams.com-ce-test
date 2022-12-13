@@ -1,0 +1,160 @@
+<div class="page-header">
+	<h1>
+		NCE Exams
+	</h1>
+</div>
+<div class="row">
+	<div class="span5">
+		<h2>NCE Pre-Assessment Exam</h2>
+		<p>This online Pre-Assessment Exam has not been standardized, and it is different than the others available at this site (Practice Exams 1 – 3). This examination is not constructed like the actual NCE. There are 25 questions for each of the eight CACREP areas, which is unlike the NCE. The purpose of this Pre-Assessment Examination is to determine your strengths and weaknesses so that you can prioritize your study.</p>
+
+		<p>In addition, please be aware that the 200-items on the Pre-Assessment Exam are not specifically formatted in the domain framework. However, the majority of them contain the wording that will be found in the 173 domain items. For many of the questions, especially those for helping relations (including family), human development, group, career, and associated theories, the questions are presented in a scenario format similar to the domain format. The questions are requesting answers for best client therapies, best techniques for specific symptoms, and disorder identification. Scoring for the Pre-Assessment Exam is organized according to the CACREP areas.</p>
+
+		<p>Please see the introductory chapter of your Dr. Arthur’s Study Guide for more information about how the actual NCE is organized. Feedback from those who have taken this examination has indicated it is more difficult than the actual NCE. Thus, do not be too discouraged if you do not do well. If you take this examination before any study, and if you have been out of your college program for at least two years, the result may be disappointing. In all likelihood you can add approximately 16 points to your raw score and that may be close to where you would score today on the NCE.</p>
+
+		<p>Click the button below once you are ready to complete the Pre-Assessment Exam. You will be taken to page 1 of 10, each of which contains 20 multiple choice questions (200 total). Once you complete the Pre-Assessment Exam, you will be shown your score in each of the 8 CACREP areas. From these scores, you can see your relative strengths and weaknesses, which can be used to direct your preparation.</p>
+		<h3>
+			Pre-Assessment Exam <br />
+			<% if previous_score = Average.first(user_id: session[:user], exam_id: 4) %>
+				<small style="color: #009c23;"><strong>Last score <%= previous_score.score %>%</strong></small>
+			<% elsif use = Use.first(user_id: session[:user], exam_id: 4) %>
+				<small style="color: #009c23;"><strong>In progress</strong></small>
+			<% else %>
+				<small style="color: #009c23;"><strong>Not taken</strong></small>
+			<% end %>
+		</h3>
+		<ul class="nav nav-pills" style="margin-top: 6px;">
+			<li class="active"><a href="/nce/exams/4" class="">Go to Pre-Assessment Exam</a></li>
+		</ul>
+	</div>
+	<div class="span7">
+		<h2>NCE Practice Exams</h2>
+		<p>The Pre-Assessment Exam contains 200-questions representing the CACREP common core (subject areas). The content of the study supplement is the source for answering the Pre-assessment Exam.</p>
+
+		<p>Practice Exams 1, 2, and 3 are similar to the newly Domain-formatted NCE starting March 1, 2020.  Each exam contains 200-items formatted for the 6 domains that cover the 173 content items. The study supplement is the source for those questions as new material has been added to prepare examinees for the newer integrated CACREP-Domain questions.</p>
+
+		<p>Practice Exams 1 - 3 include the material for the CACREP objectives and standards (as with the Pre-Assessment Exam). However, the scoring format will be for the 6 domains (see below) rather than the 8 CACREP area scores. (Scoring by CACREP is only shown for the Pre-Assessment Exam).</p>
+
+		<p>For Exams 1 - 3, the scores will be reflected in the 6 domains. The questions will be recognized for the domain content after studying the Introduction unit in the Study Supplement. The number of questions for each of the six domains for scoring and a total score (plus 40 trial questions) are:</p>
+
+<ol>
+	<li>Professional Practice and Ethics -19 count plus 5 trial - 24</li>
+	<li>Intake, Assessment, and Diagnosis - 19 count plus 5 trial - 24</li>
+	<li>Areas of Clinical Focus - 47 count plus 10 trial - 57</li>
+	<li>Treatment Planning -14 count plus 5 trial - 19</li>
+	<li>Counseling Skills and Intervention - 48 count plus 10 trial - 58</li>
+	<li>Core Counseling Attributes - 13 count plus 5 trial - 18</li>
+</ol>
+
+		<p>The overall points for the practice examinations is 160 counting questions plus 40 trial questions.
+
+		<p>The Practice Exams are intended to represent the actual format and content of the NCE. These online examinations are designed to serve three purposes:</p>
+
+<ol>
+	<li>To expose you to many practice questions that are styled in a variety of formats to include scenario practice exercises.</li>
+	<li>To model a scoring system that will reflect the scores you will receive upon completing the NCE.</li>
+	<li>To give you practice in taking a 200-item examination.</li>
+</ol>
+
+		<p>Answers and explanations follow at the end of each exam. You may want to time yourself to see how long it takes you to complete 200 questions.</p>
+
+		<p>After completing a practice exam, you will be shown your overall score, along with the average score of all other users for comparison. In addition, your score will be broken down by each of the each of the six domain areas. </p>
+
+		<p>The <strong>“Go to Practice Exam”</strong> button below will take you to page 1 of 10, each of which contains 20 multiple choice questions (200 total).</p>
+
+		<p>Use the <strong>“Exam Areas”</strong> dropdown button if you want to focus your study on only one of the individual areas. The number of questions varies for these areas. Feedback on these sub-exams is instant, but you are not provided a score. You may find this feature useful as a quick way to “refresh” your familiarization in a certain area.</p>
+
+		<p>Note: Even though the exam questions have been screened by professionals in the respective specialty areas, the questions have not been validated. (This process is under way.) Periodically, we discover typos or errors that have gone unnoticed by the reviewers. If you discover any typo, omission, misleading material, or writing that is unclear, we would appreciate your feedback and helpful suggestions.</p>
+		<h3>Practice Exam 1 <br />
+		<% if previous_score = Average.first(user_id: session[:user], exam_id: 1) %>
+			<small style="color: #009c23;"><strong>Last score <%= previous_score.score %>%</strong></small>
+		<% elsif use = Use.first(user_id: session[:user], exam_id: 1) %>
+			<small style="color: #009c23;"><strong>In progress</strong></small>
+		<% else %>
+			<small style="color: #009c23;"><strong>Not taken</strong></small>
+		<% end %>
+		</h3>
+		<ul class="nav nav-pills" style="margin-top: 6px;">
+			<li class="active"><a href="/nce/exams/1" class="">Go to Practice Exam 1</a></li>
+	  		<li class="dropup">
+	  			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	  				Exam Areas
+	  				<b class="caret"></b>
+	  			</a>
+	  			<ul class="dropdown-menu">
+						<li><h1 style="font-size: 1em; padding-left: 1em; color: black;"><strong>Study Areas</strong></h1></li>
+						<li class="divider"></li>
+						<li><a href="/nce/guide/1/Domain 1: Professional Practice and Ethics">Domain 1: Professional Practice and Ethics</a></li>
+						<li><a href="/nce/guide/1/Domain 2: Intake, Assessment, and Diagnosis">Domain 2: Intake, Assessment, and Diagnosis</a></li>
+						<li><a href="/nce/guide/1/Domain 3: Areas of Clinical Focus">Domain 3: Areas of Clinical Focus</a></li>
+						<li><a href="/nce/guide/1/Domain 4: Treatment Planning">Domain 4: Treatment Planning</a></li>
+						<li><a href="/nce/guide/1/Domain 5: Counseling Skills and Interventions">Domain 5: Counseling Skills and Interventions</a></li>
+						<li><a href="/nce/guide/1/Domain 6: Core Counseling Attributes">Domain 6: Core Counseling Attributes</a></li>
+	        </ul>
+	  		</li>
+			</ul>
+		<% unless @max_exams > 2 %>
+			<br />
+			<span><a class="btn btn-success" href="/checkout/nce-upgrade">Buy 2 more practice exams for $60</a></span>
+		<% end %>
+		<% if @max_exams > 2 %>
+			<h3 style="margin-top: 9px;">Practice Exam 2 <br />
+			<% if previous_score = Average.first(user_id: session[:user], exam_id: 2) %>
+				<small style="color: #009c23;"><strong>Last score <%= previous_score.score %>%</strong></small>
+			<% elsif use = Use.first(user_id: session[:user], exam_id: 2) %>
+				<small style="color: #009c23;"><strong>In progress</strong></small>
+			<% else %>
+				<small style="color: #009c23;"><strong>Not taken</strong></small>
+			<% end %>
+			</h3>
+			<ul class="nav nav-pills" style="margin-top: 6px;">
+				<li class="active"><a href="/nce/exams/2" class="">Go to Practice Exam 2</a></li>
+	  		<li class="dropup">
+	  			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	  				Exam Areas
+	  				<b class="caret"></b>
+	  			</a>
+	  			<ul class="dropdown-menu">
+						<li><h1 style="font-size: 1em; padding-left: 1em; color: black;"><strong>Study Areas</strong></h1></li>
+						<li class="divider"></li>
+						<li><a href="/nce/guide/2/Domain 1: Professional Practice and Ethics">Domain 1: Professional Practice and Ethics</a></li>
+						<li><a href="/nce/guide/2/Domain 2: Intake, Assessment, and Diagnosis">Domain 2: Intake, Assessment, and Diagnosis</a></li>
+						<li><a href="/nce/guide/2/Domain 3: Areas of Clinical Focus">Domain 3: Areas of Clinical Focus</a></li>
+						<li><a href="/nce/guide/2/Domain 4: Treatment Planning">Domain 4: Treatment Planning</a></li>
+						<li><a href="/nce/guide/2/Domain 5: Counseling Skills and Interventions">Domain 5: Counseling Skills and Interventions</a></li>
+						<li><a href="/nce/guide/2/Domain 6: Core Counseling Attributes">Domain 6: Core Counseling Attributes</a></li>
+	        </ul>
+	  		</li>
+			</ul>
+			<h3 style="margin-top: 9px;">
+				Practice Exam 3 <br />
+				<% if previous_score = Average.first(user_id: session[:user], exam_id: 3) %>
+					<small style="color: #009c23;"><strong>Last score <%= previous_score.score %>%</strong></small>
+				<% elsif use = Use.first(user_id: session[:user], exam_id: 3) %>
+					<small style="color: #009c23;"><strong>In progress</strong></small>
+				<% else %>
+					<small style="color: #009c23;"><strong>Not taken</strong></small>
+				<% end %>
+			</h3>
+			<ul class="nav nav-pills" style="margin-top: 6px;">
+				<li class="active"><a href="/nce/exams/3" class="">Go to Practice Exam 3</a></li>
+	  		<li class="dropup">
+	  			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	  				Exam Areas
+	  				<b class="caret"></b>
+	  			</a>
+	  			<ul class="dropdown-menu">
+	          <li><h1 style="font-size: 1em; padding-left: 1em; color: black;"><strong>Study Areas</strong></h1></li>
+						<li class="divider"></li>
+						<li><a href="/nce/guide/3/Domain 1: Professional Practice and Ethics">Domain 1: Professional Practice and Ethics</a></li>
+						<li><a href="/nce/guide/3/Domain 2: Intake, Assessment, and Diagnosis">Domain 2: Intake, Assessment, and Diagnosis</a></li>
+						<li><a href="/nce/guide/3/Domain 3: Areas of Clinical Focus">Domain 3: Areas of Clinical Focus</a></li>
+						<li><a href="/nce/guide/3/Domain 4: Treatment Planning">Domain 4: Treatment Planning</a></li>
+						<li><a href="/nce/guide/3/Domain 5: Counseling Skills and Interventions">Domain 5: Counseling Skills and Interventions</a></li>
+						<li><a href="/nce/guide/3/Domain 6: Core Counseling Attributes">Domain 6: Core Counseling Attributes</a></li>
+	        	 </ul>
+	  			</li>
+			</ul>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,187 @@
+<style>
+	.nav.nav-tabs li a	{ border-color: black; }
+	.nav.nav-tabs li.active	{ color: red; }
+	.nav.nav-tabs li	{
+		border: none;
+		border-color: white;
+		color: black;
+	}
+	h1	{
+		color: #445c6e;
+		font-size: 1.9em;
+		padding-bottom: 8px;
+	}
+	h4	{ padding-bottom: 5px; }
+	div.questions ul	{ padding-bottom: 2px; }
+	div.questions ul li ol	{ margin-top: 8px; }
+	div.questions ul li ol li	{ margin-left: 2em; }
+	.md blockquote	{ font-size: 11px; }
+	.600	{ font-weight: 600; }
+</style>
+
+<div class="row">
+
+	<div class="span12">
+
+		<div style="float: right"><a class="btn btn-small btn-primary" href="/admin/casestudies/<%= @casestudies.id %>/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-small btn-primary" href="/admin/casestudies">Index</a></div>
+		<h1 style="font-size: 2.5em;">Set <%= @casestudies.set %> - Case Study <%= @casestudies.title %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <% if @casestudies.active? %><span class="label label-success">Active</span><% end %> <% if @casestudies.sample? %><span class="label label-warning">Sample</span><% end %>
+		
+	</div>
+	<div class="span12">
+		<div role="tabpanel">
+  			<ul class="nav nav-tabs" role="tablist">
+  				<li role="presentation" class="active"><a href="#one" aria-controls="one" role="tab" data-toggle="tab">Part One</a></li>
+  				<li role="presentation"><a href="#two" aria-controls="two" role="tab" data-toggle="tab">Part Two</a></li>
+				<li role="presentation"><a href="#three" aria-controls="three" role="tab" data-toggle="tab">Part Three</a></li>
+  			</ul>
+		
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane fade in active" id="one">
+					
+			<h1>Part One</h1>
+			
+			<h3>Intake</h3><br />
+			<p style="font-size: 1.1em; margin-bottom: 14px;"><strong><%= @casestudies.name %></strong></p>
+			<p><strong>Age:</strong> <%= @casestudies.age %></p>
+			<p><strong>Sex:</strong> <%= @casestudies.sex %></p>
+			<p><strong>Gender:</strong> <%= @casestudies.gender %></p>
+			<p><strong>Sexuality:</strong> <%= @casestudies.sexuality %></p>
+			<p><strong>Ethnicity:</strong> <%= @casestudies.ethnicity %></p>
+			<p><strong>Relationship Status:</strong> <%= @casestudies.relationship %></p>
+			<p><strong>Counseling Setting:</strong> <%= @casestudies.setting %></p>
+			<p><strong>Types of Counseling:</strong> <%= @casestudies.types %></p>
+			<p><strong>Presenting Problem:</strong> <%= @casestudies.problem %></p>
+			<p><strong>Diagnosis:</strong> <%= @casestudies.diagnosis %></p>
+			<br />
+			
+			<% @charts.sort_by(&:position).each do |chart| %>
+			<% if chart.part == "1" %>
+			<h4><%= chart.title %></h4>
+			<p class="md"><%= markdown chart.body %></p>
+			<% end %>
+			<% end %>
+			<br />
+			
+			<div class="questions">
+			<% @casequestions.sort_by(&:position).each do |casequestion| %>
+			<% if casequestion.part == 1 %>
+			<p><em><%= casequestion.domain %></em><br />
+			<em><%= casequestion.sub_domain %></em></p>
+			<ul style="list-style: none;">
+				<li><%= casequestion.position %>. <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>">
+						<% if caseanswer.correct == "true" %>
+						<li><strong><% caseanswer.position %> <%= caseanswer.body %></strong></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>	
+					</ol>
+				</li>
+				<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion %></blockquote></li>
+			</ul>
+			
+			<% end %>
+			<% end %>
+			<br />
+			</div>
+		
+		</div>
+		<div role="tabpanel" class="tab-pane fade in" id="two">
+	
+			<h1>Part Two</h1>
+			
+			<% @charts.sort_by(&:position).each do |chart| %>
+			<% if chart.part == "2" %>
+			<h4><%= chart.title %></h4>
+			<p class="md"><%= markdown chart.body %></p>
+			<% end %>
+			<% end %>
+			<br />
+			
+			<div class="questions">
+				<% @casequestions.sort_by(&:position).each do |casequestion| %>
+			<% if casequestion.part == 2 %>
+			<p><em><%= casequestion.domain %></em><br />
+			<em><%= casequestion.sub_domain %></em></p>
+			<ul style="list-style: none;">
+				<li><%= casequestion.position %>. <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>">
+						<% if caseanswer.correct == "true" %>
+						<li><strong><% caseanswer.position %> <%= caseanswer.body %></strong></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>	
+					</ol>
+				</li>
+				<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion %></blockquote></li>
+			</ul>
+			<% end %>
+			<% end %>
+			
+			<br />
+			</div>
+		
+		</div>
+		<div role="tabpanel" class="tab-pane fade in" id="three">
+	
+			<h1>Part Three</h1>
+			
+			<% @charts.sort_by(&:position).each do |chart| %>
+			<% if chart.part == "3" %>
+			<h4><%= chart.title %></h4>
+			<p class="md"><%= markdown chart.body %></p>
+			<% end %>
+			<% end %>
+			<br />
+							
+			<div class="questions">
+				<% @casequestions.sort_by(&:position).each do |casequestion| %>
+			<% if casequestion.part == 3 %>
+			<p><em><%= casequestion.domain %></em><br />
+			<em><%= casequestion.sub_domain %></em></p>
+			<ul style="list-style: none;">
+				<li><%= casequestion.position %>. <%= casequestion.body %>
+					<ol type="A">
+						<% casequestion.caseanswers.each do |caseanswer| %>
+						<label class="radio">
+						<input type="radio" name="optionsRadios<%= casequestion.position %>" id="optionsRadios<%= caseanswer.id %>" value="option<%= caseanswer.id %>">
+						<% if caseanswer.correct == "true" %>
+						<li><strong><% caseanswer.position %> <%= caseanswer.body %></strong></li>
+						<% else %>
+						<li><% caseanswer.position %> <%= caseanswer.body %></li>
+						<% end %>
+						</label>
+						<% end %>	
+					</ol>
+				</li>
+				<li style="margin-top: 8px;" class="md"><blockquote><%= markdown casequestion.discussion %></blockquote></li>
+			</ul>
+			<% end %>
+			<% end %>
+			</div>
+			
+			<hr style="border-color: #4e86c6" />
+			<div id="references">
+			
+				<% unless @casestudies.resources == nil %>
+					<h2>Resources</h2>
+					<span class="reference" style="font-size: 14px;">
+					<%= markdown @casestudies.resources %>
+					</span>
+					<br />
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+

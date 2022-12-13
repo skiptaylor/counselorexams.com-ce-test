@@ -1,0 +1,37 @@
+<style>
+	input[type=text] { border: 1px solid #396292; padding: 7px; }
+	
+</style>
+
+<div class="row">
+	<div class="span12">
+		<h1>Answers</h1>		
+		<hr />
+		<form class="form-horizontal" method="post">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="position">Position</label>
+					<div class="controls">
+						<input type="text" name="position" id="position" class="span2" value="<%= @caseanswers.position %>" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="body">Answer</label>
+					<div class="controls">
+						<input type="text" name="body" id="body" class="span7" value="<%= @caseanswers.body %>" />
+					</div>
+				</div>
+				<div class="control pull-right">
+					<input class="btn btn-small btn-success" type="submit" value="Save" /> &nbsp;<a class="btn btn-small" onclick="goBack()">Cancel</a>
+				</div><br />
+				<hr style="border-color: #4e86c6" />
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<script>
+	function goBack() {
+	window.history.back();
+}
+</script>

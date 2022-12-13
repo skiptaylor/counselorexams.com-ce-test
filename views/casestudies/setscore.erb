@@ -1,0 +1,134 @@
+<style>
+	table.domain tr th, table.domain tr td 	{
+		text-align: center;
+	}
+</style>
+
+<div class="row" style="margin-top: -24px;">
+	<div class="span12">
+		<div class="page-header">
+			<h1> <span class="pull-right">Name: <%= @user.name %></span>Final Set-<%= params[:set] %> Exam Score</h1>
+		</div>
+	</div>
+	<div class="span12">
+		<div class="well" style="margin-top: -12px; background-color: #034fc8; border-color: #4e86c6; padding: 10px;">
+			<h1 style="color: #fff;">&nbsp;&nbsp;&nbsp;Your Set-<%= params[:set] %> Overall Exam Score: <%= (@correct1 + @correct2 + @correct4 + @correct5 + @correct6) * 100 / (@total1 + @total2 + @total4 + @total5 + @total6) %>%</h1>
+		</div>
+		<div class="well" style="margin-top: -22px; border-color: #4e86c6">	
+			<h1 style="font-size: 1.4em;">Your Results</h1>
+			<table class="table table-bordered table-condensed table-striped domain" style="border-color: #4e86c6; border-left: 1px;">
+				<thead>
+					<tr style="background-color: #cbd5e2;">
+						<th style="text-align: left;">Set-<%= params[:set] %></th>
+						<th># Correct</th>
+						<th>Total Questions</TH>
+						<th>% Score</th>
+					</tr>
+				</thead>
+				
+				
+				
+				
+				<tbody>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 1:</strong> Professional Practice and Ethics</td>
+						<td><%= @correct1 %></td>
+						<td><%= @total1 %></td>
+						<td><%= @correct1 * 100 / @total1 %>%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 2:</strong> Intake, Assessment, and Diagnosis</td>
+						<td><%= @correct2 %></td>
+						<td><%= @total2 %></td>
+						<td><%= @correct2 * 100 / @total2 %>%</td>
+					</tr>
+						<td style="text-align: left;" colspan="6"><strong>Domain 3:</strong> Areas of Clinical Focus<sup>1</sup></td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 4:</strong> Treatment Planning</td>
+						<td><%= @correct4 %></td>
+						<td><%= @total4 %></td>
+						<td><%= @correct4 * 100 / @total4 %>%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 5:</strong> Counseling Skills and Interventions</td>
+						<td><%= @correct5 %></td>
+						<td><%= @total5 %></td>
+						<td><%= @correct5 * 100 / @total5 %>%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 6:</strong> Core Counseling Attributes</td>
+						<td><%= @correct6 %></td>
+						<td><%= @total6 %></td>
+						<td><%= @correct6 * 100 / @total6 %>%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Total</strong></td>
+						<td><strong><%= @correct1 + @correct2 + @correct4 + @correct5 + @correct6 %></strong></td>
+						<td><strong><%= @total1 + @total2 + @total4 + @total5 + @total6 %></strong></td>
+						<td><strong><%= (@correct1 + @correct2 + @correct4 + @correct5 + @correct6) * 100 / (@total1 + @total2 + @total4 + @total5 + @total6) %>%</strong></td>
+					</tr>
+					
+				
+					
+					<tr>
+						<td style="text-align: left; font-weight: 600; font-size: 0.9em;" colspan="4"><em>This table shows your total results for the Case Studies Set. It is recommended that you prioritize your future studies by focusing on the Domains(s) where you scored lower.</em></td>
+					</tr>
+				</tbody>
+			</table>
+			<h1 style="font-size: 1.4em;">Domain Breakdown</h1>
+			<table class="table table-bordered table-condensed table-striped domain" style="border-color: #4e86c6; border-left: 1px;">
+				<thead>
+					<tr style="background-color: #cbd5e2;">
+						<th style="text-align: left;">Set-<%= params[:set] %></th>
+						<th>Total Questions</th>
+						<th>% of Set</th>
+						<th>NCMHCE Range</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 1:</strong> Professional Practice and Ethics</td>
+						<td><%= @total1 %></td>
+						<td><%= @total1 * 100 / 156 %>%</td>
+						<td>10-20%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 2:</strong> Intake, Assessment, and Diagnosis</td>
+						<td><%= @total2 %></td>
+						<td><%= @total2 * 100 / 156 %>%</td>
+						<td>20-30%</td>
+					</tr>
+						<td style="text-align: left;" colspan="4"><strong>Domain 3:</strong> Areas of Clinical Focus<sup>1</sup></td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 4:</strong> Treatment Planning</td>
+						<td><%= @total4 %></td>
+						<td><%= @total4 * 100 / 156 %>%</td>
+						<td>10-20%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 5:</strong> Counseling Skills and Interventions</td>
+						<td><%= @total5 %></td>
+						<td><%= @total5 * 100 / 156 %>%</td>
+						<td>25-30%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left;"><strong>Domain 6:</strong> Core Counseling Attributes</td>
+						<td><%= @total6 %></td>
+						<td><%= @total6 * 100 / 156 %>%</td>
+						<td>10-20%</td>
+					</tr>
+					<tr>
+						<td style="text-align: left; font-weight: 600; font-size: 0.9em;" colspan="4"><em>This table shows the number of questions for each Domain in this set and the percentage of the overall number of questions for the set. The “NCMHCE Range” column is the percentage range provided by the NBCC for the actual NCMHCE. Knowing the actual range can help you further prioritize your studying, as well as prepare you for the number of each questions per Domain you will see in the case studies.</em></td>
+					</tr>
+				</tbody>
+			</table>
+			<p><small><sup>1</sup>The examination will have questions on all domains except <strong>Domain 3: Areas of Clinical Focus</strong>. Because this information will be provided to the candidate for each case study on the examination, no questions will be asked on this domain.</small></p>
+		</div>
+	</div>
+	<!-- <div class="span12">
+		<h4>Here is your ...</h4>
+	</div> -->
+</div>
+

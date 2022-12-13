@@ -1,0 +1,122 @@
+<style>
+	tr.cs:hover	{
+		background-color: #dbe6f5;
+	}
+</style>
+
+
+<div class="row" style="margin-top: -24px;">
+	<div class="span12">
+		<div class="page-header">
+			<div class="pull-right" style="margin-top: 7px;">
+				<p style="color: #b32623; font-weight: 600; font-size: 0.9em;">
+			<a href="#infoModal" role="button" style="margin-top: -6px;" class="btn btn-info pull-right" data-toggle="modal"><strong>Exam Instructions</strong> &nbsp; <i class="icon-chevron-down icon-white"></i></a></p>
+			</div>
+			<h1>
+				Case Study Sets
+			</h1>
+		</div>
+	</div>
+</div>
+
+<div class="row">	
+	<div class="modal hide fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="color: white; background-color: #4287d9;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h2 class="modal-title" id="infoModalLabel">Exam Instructions</h2>
+				</div>
+				<div class="modal-body" style="margin: 2em;">
+					<p>If you leave the exam case study page before finishing, your selected answers will be lost and you will need to start over.</p>
+					<p>There are three parts to each case study beginning with Intake. The chart is on the left and the questions are on the right. You can't go back once a part has been completed.</p>
+					<p>Questions are presented one at a time with the "Next Question" button leading through all 13. Answering Question 13, the last, will submit your answers and create your score page.</p>
+					<p>Each question has 4 multiple choice answers. Once an answer is submitted you can't go back.</p>
+					<p>The score page shows your score and all parts, questions, and answers. The correct answer to a question will be shown along with your selected answer - right or wrong. Feedback for the correct answer is shown below each question.</p>
+					<p>You will have access to this case study from your profile page at any time to see your score, review it, or retake it.</p>
+					<p>Once all 12 case studies have been completed you will have access to an Overall Exam Score page that provides an overall score for the set of 12 case studies. The score will be broken down for all 5 domains, allowing you to focus your further studies on areas where you scored weakest.</p>
+					<p>This is a simulation and all answers count. All questions are scored on our case study simulations. On the NCMHCE, each case study will have 9 – 15 questions, but not all will be counted in your final score. Because unscored questions are not indicated, it is best to assume all will count when answering. We have set-up our case studies and scoring accordingly.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12">
+		<!-- <hr style="margin-top: 0; margin-bottom: 0;" /> -->
+		<p style="font-weight: 300; margin-top: -12px; margin-bottom: 22px; color: #007f00;"><strong>Purchasing note:</strong> Review the Diagnosis for each case study in a set to help decide which set will best suite your study needs.</p>
+		<table class="table table-stripe">
+			<tbody>
+				<tr style="background-color: #dbe5e4;">
+					<td style="padding: 8px 0 10px 12px; color: #fff; background-color: #0a7fff;"><strong>Set-A</strong></td>
+					<td colspan="2" style="padding: 8px 0 2px 8px; color: #000;"><strong>Diagnosis</strong>
+					<span style="float: right; margin: -4px 5px 0 0;"><a href="/checkout/ncmhce_na?package=Starter%20Package%20SetA" class="btn btn-success"><strong>Purchase Set-A for $90</strong></a></span></td>
+				</tr>
+				<% @casestudies.sort_by{|c| [c.set, c.title.to_i]}.each do |casestudy| %>
+				<% if casestudy.set == "A" %>
+				<tr class="cs">
+					<td><strong>Case&nbsp;Study&nbsp;<%= casestudy.title %></strong></td>
+					<td><%= casestudy.diagnosis %></td>
+					<td> </td>
+				</tr>
+				<% end %>
+				<% end %>
+				<tr> 
+					<td> </td>
+				</tr>
+				<tr style="background-color: #dbe5e4;">
+					<td style="padding: 8px 0 10px 12px; color: #fff; background-color: #dbb341;"><strong>Set-B</strong></td>
+					<td  colspan="2" style="padding: 8px 0 2px 8px; color: #000;"><strong>Diagnosis</strong><span style="float: right; margin: -4px 5px 0 0;"><a href="/checkout/ncmhce_nb?package=Starter%20Package%20SetB" class="btn btn-success"><strong>Purchase Set-B for $90</strong></a></span></td>
+				</tr>
+				<% @casestudies.sort_by{|c| [c.set, c.title.to_i]}.each do |casestudy| %>
+				<% if casestudy.set == "B" %>
+				<tr class="cs">
+					<td><strong>Case&nbsp;Study&nbsp;<%= casestudy.title %></strong></td>
+					<td><%= casestudy.diagnosis %></td>
+					<td> </td>
+				</tr>
+				<% end %>
+				<% end %>
+				<tr> 
+					<td> </td><td> </td><td> </td>
+				</tr>
+				<tr style="background-color: #dbe5e4;">
+					<td style="padding: 8px 0 10px 12px; color: #fff; background-color: #7161b6;"><strong>Set-C</strong></td>
+					<td  colspan="2" style="padding: 8px 0 2px 8px; color: #000;"><strong>Diagnosis</strong><span style="float: right; margin: -4px 5px 0 0;"><a href="/checkout/ncmhce_nc?package=Starter%20Package%20SetC" class="btn btn-success"><strong>Purchase Set-C for $90</strong></a></span></td>
+				</tr>
+				<% @casestudies.sort_by{|c| [c.set, c.title.to_i]}.each do |casestudy| %>
+				<% if casestudy.set == "C" %>
+				<tr class="cs">
+					<td><strong>Case&nbsp;Study&nbsp;<%= casestudy.title %></strong></td>
+					<td><%= casestudy.diagnosis %></td>
+					<td> </td>
+				</tr>
+				<% end %>
+				<% end %>
+				<tr> 
+					</td><td> </td>
+				</tr>
+				<tr style="background-color: #dbe5e4;">
+					<td style="padding: 8px 0 10px 12px; color: #fff; background-color: #da655a;"><strong>Set-D</strong></td>
+					<td  colspan="2" style="padding: 8px 0 2px 8px; color: #000;"><strong>Diagnosis</strong><span style="float: right; margin: -4px 5px 0 0;"><a href="/checkout/ncmhce_nd?package=Starter%20Package%20SetD" class="btn btn-success"><strong>Purchase Set-D for $90</strong></a></span></td>
+				</tr>
+				<% @casestudies.sort_by{|c| [c.set, c.title.to_i]}.each do |casestudy| %>
+				<% if casestudy.set == "D" %>
+				<tr class="cs">
+					<td><strong>Case&nbsp;Study&nbsp;<%= casestudy.title %></strong></td>
+					<td><%= casestudy.diagnosis %></td>
+					<td> </td>
+				</tr>
+				<% end %>
+				<% end %>
+				<tr> 
+					<td> </td><td> </td><td> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
