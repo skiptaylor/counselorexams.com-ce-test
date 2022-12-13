@@ -112,6 +112,9 @@
   			</h3>
 			<br />
 			
+			<% Message.all(ncmhce: true).each do |m| %>
+			<div class="alert alert-info" style="border: none; clear: both;"><%= m.body %></div>
+			<% end %>
 			
 			<% unless @user.purchases.any? { |purchase| (purchase.package == "NCMHCE: Second Chance Upgrade") || (purchase.package == "NCMHCE: Full Package") || (purchase.package == "NCMHCE: Package SetA") || (purchase.package == "NCMHCE: Package SetB") || (purchase.package == "NCMHCE: Package SetC") || (purchase.package == "NCMHCE: Package SetD") } %>
 		    <% if @user.purchases.any? { |purchase| (purchase.package == "NCMHCE: Starter Package SetA") || (purchase.package == "NCMHCE: Starter Package SetB") || (purchase.package == "NCMHCE: Starter Package SetC") || (purchase.package == "NCMHCE: Starter Package SetD") && ((purchase.created_at + 14) > Time.now.to_date) } %>
@@ -336,9 +339,9 @@
 		</div>
 		
 
-		<% Message.all(ncmhce: true).each do |m| %>
+		<!-- <% Message.all(ncmhce: true).each do |m| %>
 		<div class="alert alert-info" style="border: none; clear: both;"><%= m.body %></div>
-		<% end %>
+		<% end %> -->
 
 	 
 	 
