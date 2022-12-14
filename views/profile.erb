@@ -140,7 +140,7 @@
 			
 			
 			
-			<p style="font-size: 0.9em;">You have access to: <strong><% if @user.setA %> &nbsp;Set-A <% end %> <% if @user.setB %> &nbsp;Set-B <% end %> <% if @user.setC %> &nbsp;Set-C <% end %> <% if @user.setD %> &nbsp;Set-D <% end %> </strong></p>
+			<p style="font-size: 0.9em;">You can access: <strong><% if @user.setA %> &nbsp;Set-A <% end %> <% if @user.setB %> &nbsp;Set-B <% end %> <% if @user.setC %> &nbsp;Set-C <% end %> <% if @user.setD %> &nbsp;Set-D <% end %> </strong> <% if @user.hard_copy %> &nbsp;and bought an <strong>Overview Hard Copy</strong><% end %></p>
   			
   		</div>
 	<% else %>

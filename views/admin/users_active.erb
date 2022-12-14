@@ -1,0 +1,65 @@
+<div class="row">
+	
+	<div class="span3">
+		<%= erb :'admin/navigation', layout: false %>
+	
+	<div class="affix" style="margin-top: 620px;">
+		<form method="get">
+			<p><%= @start.to_fields 'start' %></p>
+			<p><%= @end.to_fields 'end' %></p>
+			<p>
+				<button type="submit" class="btn btn-primary">Filter</button>
+				<a href="<%= request.url %><%= params.count > 0 ? '&export=true' : '?export=true' %>" class="btn">Export</a>
+			</p>
+		</form>
+	</div>
+	</div>
+	
+	<div class="span9">
+
+		<H1 class="page-header">Active Users</H1>
+		<!-- <form class="form-search pull-right" method="get" action="/admin/users">
+			<div class="input-append">
+			<input type="text" class="input-xlarge search-query" name="search" value="<%= params[:search] %>" />
+			<button type="submit" style="border: 1px solid green;" class="btn btn-success ">Search</button>
+		</div>
+		</form> -->
+
+		<table class="table table-condensed table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Expires</th>
+					<!-- <td> </td> -->
+					<th style="text-align: right;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<% unless user.admin %>
+					<tr>
+						<td>
+							
+							<%= user.name %>
+						</td>
+						<td>	
+							<a href="mailto:<%= user.email %>"><%= user.email %></a>
+						</td>
+						<td>
+							<small><%= user.expiration_date %> </small>
+						</td>
+						<td style="text-align: right;">
+							<% if user.email == "sample" %>
+							<a href="/admin/users/<%= user.id %>/remove_sample">Remove</a>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+				<% end %>
+		  </tbody>
+		</table>
+	</div>
+	
+</div>
+
