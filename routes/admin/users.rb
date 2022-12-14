@@ -4,7 +4,8 @@ get '/admin/users_active/?' do
 	if params[:start_month] && params[:start_day] && params[:start_year]
     @start = Chronic.parse("#{params[:start_year]}-#{params[:start_month]}-#{params[:start_day]}")
   else
-    @start = Chronic.parse('June 1, 2012')
+    @start = Chronic.parse('one year ago')
+    # @start = Chronic.parse('June 1, 2012')
   end
 
   if params[:end_month] && params[:end_day] && params[:end_year]
@@ -13,8 +14,8 @@ get '/admin/users_active/?' do
     @end = Time.now
   end
 
+	@users = User.all(:created_at.gte => (@start - (12*60*60)), :created_at.lt => (@end + (12*60*60)), :order => :created_at.desc)
 	
-	@users = User.all(:created_at.gte => (@start - (12*60*60)), :created_at.lt => (@end + (12*60*60)), :order => :created_at.desc, limit: 180)
 	
 	if params[:export]
   	response.headers['Content-Type'] = 'text/csv; charset=utf-8' 
@@ -22,12 +23,13 @@ get '/admin/users_active/?' do
   	
   	file = ''
   	file = CSV.generate do |csv|
-  		csv << ['Name', 'Email']
+  		csv << ['Name', 'Email', 'Expiration']
   		@users.each do |user|
   			csv << [
   				
   				user.name,
-  				user.email
+  				user.email,
+          user.expiration_date
   				
   			]
   		end
@@ -38,14 +40,6 @@ get '/admin/users_active/?' do
 		erb :'admin/users_active'
 	end
 end
-
-
-
-
-
-
-
-
 
 
 get '/admin/users/?' do

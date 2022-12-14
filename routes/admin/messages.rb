@@ -10,11 +10,9 @@ post '/admin/messages/?' do
   admin!
   
   message = Message.create(body: params[:body].strip)
-  message.update(casestudies: true) if params[:casestudies]
-  message.update(ncmhce: true) if params[:ncmhce]
-  message.update(nce: true) if params[:nce]
   message.update(profile: true) if params[:profile]
-  message.update(exams: true) if params[:exams]
+  message.update(casestudies: true) if params[:casestudies]
+  message.update(nce: true) if params[:nce]
   
   redirect '/admin/messages'
 end

@@ -5,7 +5,7 @@ class Casestudy
 	property   :deleted_at, ParanoidDateTime
 	timestamps :at
 
-	property :title,        Integer, default: ''
+	property :title,        String, default: ''
   property :number,       Text,    default: ''
   property :set,          String,  default: ''  
 	property :name,         Text, default: ''

@@ -102,6 +102,7 @@
 
   	
 	<% unless @user.expired? %>
+	<% if @user.setA || @user.setB || @user.setC || @user.setD %>
   		<div>
   			<h3>
   				<span class="oswald" style="font-size: 1.8em;">Case Studies</span>
@@ -112,7 +113,7 @@
   			</h3>
 			<br />
 			
-			<% Message.all(ncmhce: true).each do |m| %>
+			<% Message.all(casestudies: true).each do |m| %>
 			<div class="alert alert-info" style="border: none; clear: both;"><%= m.body %></div>
 			<% end %>
 			
@@ -140,7 +141,7 @@
 			
 			
 			
-			<p style="font-size: 0.9em;">You can access: <strong><% if @user.setA %> &nbsp;Set-A <% end %> <% if @user.setB %> &nbsp;Set-B <% end %> <% if @user.setC %> &nbsp;Set-C <% end %> <% if @user.setD %> &nbsp;Set-D <% end %> </strong> <% if @user.hard_copy %> &nbsp;and bought an <strong>Overview Hard Copy</strong><% end %></p>
+			<p style="font-size: 0.9em;">You have access to: <strong><% if @user.setA %> &nbsp;Set-A <% end %> <% if @user.setB %> &nbsp;Set-B <% end %> <% if @user.setC %> &nbsp;Set-C <% end %> <% if @user.setD %> &nbsp;Set-D <% end %> </strong> <% if @user.hard_copy %> &nbsp;- You bought an <strong>Overview Hard Copy</strong><% end %></p>
   			
   		</div>
 	<% else %>
@@ -151,15 +152,16 @@
 	  		<br />
 	  	</div>
 	<% end %>
+	
+	
 			
-	<% Message.all(casestudies: true).each do |m| %>
-		<div class="alert alert-info" style="border: none;"><%= m.body %></div>
-	<% end %>
-
+	
+	
 	 
 	<% unless @user.expired? %>
   		<p><a class="btn btn-small btn-primary" href="/casestudies/cs_index"><strong>Choose another Case Study to take</strong></a></p>
   	<% end %>
+	<% end %>	
   	
 	
 	<% if @user.setA || @user.setB || @user.setC || @user.setD %>
@@ -313,7 +315,8 @@
   		<% end %>
 		<% end %>
 		
-	<% end %>	
+	<% end %>
+	
   	<hr style="border-color: #55b99e;" /><br />
   
 
@@ -339,9 +342,7 @@
 		</div>
 		
 
-		<!-- <% Message.all(ncmhce: true).each do |m| %>
-		<div class="alert alert-info" style="border: none; clear: both;"><%= m.body %></div>
-		<% end %> -->
+		
 
 	 
 	 
@@ -472,9 +473,7 @@
 			</h3>
 			<br />
 		</div>
-      <% Message.all(exams: true).each do |m| %>
-        <div class="alert alert-info" style="border: none;"><%= m.body %></div>
-      <% end %>
+      
 	 	<% unless @user.expired? %>
 		<p><a class="btn btn-small btn-primary" href="/ncmhce/practice-scenarios"><strong>Choose a scenario to take</strong></a>&nbsp; <br class="visible-phone" /> &nbsp; <small>You have <%= @user.remaining_practice_scenarios %> of <%= @user.max_practice_scenarios %> remaining.</small></p>
 		<% end %>

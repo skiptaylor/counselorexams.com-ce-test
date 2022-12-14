@@ -17,7 +17,7 @@
 	
 	<div class="span9">
 
-		<H1 class="page-header">Active Users</H1>
+		<H1 class="page-header">Active Users - <small><%= @users.count %></small></H1>
 		<!-- <form class="form-search pull-right" method="get" action="/admin/users">
 			<div class="input-append">
 			<input type="text" class="input-xlarge search-query" name="search" value="<%= params[:search] %>" />
@@ -36,15 +36,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @users.each do |user| %>
-					<% unless user.admin %>
+				<% @users.sort_by(&:expiration_date).each do |user| %>
+					<% unless user.admin || (user.expiration_date <= DateTime.now) || (user.email.include? "refund") %>
 					<tr>
 						<td>
-							
 							<%= user.name %>
 						</td>
 						<td>	
-							<a href="mailto:<%= user.email %>"><%= user.email %></a>
+							<!-- <a href="mailto:<%= user.email %>"><%= user.email %></a> -->
+							<%= user.email %>
 						</td>
 						<td>
 							<small><%= user.expiration_date %> </small>
