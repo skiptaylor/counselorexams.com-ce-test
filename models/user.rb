@@ -1,14 +1,26 @@
-# Used Postico.app
-# delete from scores where user_id in (select id from users where email = 'sample');
-# delete from purchases where user_id in (select id from users where email = 'sample');
-# delete from averages where user_id in (select id from users where email = 'sample');
-# delete from uses where user_id in (select id from users where email = 'sample');
+# ALTER TABLE casestudies ALTER COLUMN title TYPE integer USING (title::integer);
+# delete from scores where deleted_at IS NOT NULL;
+# delete from caseanswers where deleted_at IS NOT NULL;
+# delete from casequestions where deleted_at IS NOT NULL;
 # delete from users where email = 'sample';
+
+# ALTER TABLE "public"."users" ADD UNIQUE ("email");
 
 # delete from scores where deleted_at IS NOT NULL;
 # delete from averages where deleted_at IS NOT NULL;
 # delete from uses where delete_at IS NOT NULL;
+# delete from users where delete_at IS NOT NULL;
+# delete from purchases where delete_at IS NOT NULL;
 
+# ALTER TABLE "public"."users" ADD "TRUE" ("setA");
+
+# Update "public"."users"
+# SET set_c = TRUE where max_scenarios = 36
+
+# ALTER TABLE casestudies
+#   ALTER COLUMN title TYPE INTEGER USING (char_length(title));
+  
+  
 class User
 	include DataMapper::Resource
 
